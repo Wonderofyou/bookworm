@@ -2,13 +2,14 @@
 import { useState, useEffect, useRef } from "react";
 import NavItem from "./NavItem";
 import SignInPopup from "./SignInPopup";
+import { useCart } from "../context/CartContext";
 
 const Navbar = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [user, setUser] = useState(null);
-  const [cartItems, setCartItems] = useState(0);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
+  const { totalItems } = useCart();
 
   // Kiểm tra xem người dùng đã xác thực khi tải trang
   useEffect(() => {
@@ -56,7 +57,7 @@ const Navbar = () => {
         <NavItem to="/">Home</NavItem>
         <NavItem to="/shop">Shop</NavItem>
         <NavItem to="/about">About</NavItem>
-        <NavItem to="/cart">Cart ({cartItems})</NavItem>
+        <NavItem to="/cart">Cart ({totalItems})</NavItem>
         {!user ? (
           <button
             onClick={() => setIsPopupOpen(true)}

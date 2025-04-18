@@ -6,26 +6,30 @@ import Shop from './pages/Shop';
 import Product from './pages/Product';
 import Cart from './pages/Cart';
 import About from './pages/About';
+import { CartProvider } from './context/CartContext';
 
 function App() {
   return (
-    <Router>
-      <div className="flex flex-col min-h-screen">
-        <Navbar />
+    <CartProvider>
 
-        <div className="flex-grow p-4">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/shop" element={<Shop />} />
-            <Route path="/shop/product" element={<Product />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/about" element={<About />} />
-          </Routes>
+      <Router>
+        <div className="flex flex-col min-h-screen">
+          <Navbar />
+
+          <div className="flex-grow p-4">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/shop" element={<Shop />} />
+              <Route path="/product/:id" element={<Product />} />
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/about" element={<About />} />
+            </Routes>
+          </div>
+
+          <Footer />
         </div>
-
-        <Footer />
-      </div>
-    </Router>
+      </Router>
+    </CartProvider>
   );
 }
 
